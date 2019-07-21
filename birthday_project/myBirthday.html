@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>My Birthday</title>
+	<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
+	<style>
+	
+		html{
+		width:100%;
+		background-color: LightSkyBlue;
+		}
+		body{
+		width: 50%;
+		margin: 5px 300px 5px 300px;
+		background: url("birthday.jpg") no-repeat fixed center/cover;
+		font-family: Verdana;
+		text-align:center;
+		}
+		
+		h1{
+		font-family: 'Luckiest Guy', cursive;
+		font-size:50px;
+		color: LightBlue;
+		text-shadow: blue 2px 2px 5px;
+		transition: 2s;
+		}
+		
+		h1:hover {
+		color: Lime;
+		text-shadow: DarkGreen 2px 2px 5px;
+		}
+		
+		h2 {
+		text-shadow: Khaki 2px 2px 5px;
+		font-family: 'Concert One', cursive;
+		font-size:32px;
+		}
+	</style>
+</head>
+<body>
+	<h1></h1>
+	<h2></h2>
+	<h2 id="currentDate"></h2>
+	<h2 id="countdowner"></h2>
+	<script>
+
+		
+		var month=window.prompt("What MONTH is your birthday in?");
+		var birthMonth=["January", "February","March","April","May","June","July","August","September","October","November","December"];
+		var checkMonth = birthMonth.indexOf(month);
+		
+		switch (month){
+			case "January":
+				var monthA = "1";
+				break;
+			case "February":
+				var monthA = "2";
+				break;
+			case "March":
+				var monthA = "3";
+				break;
+			case "April":
+				var monthA = "4";
+				break;
+			case "May":
+				var monthA = "5";
+				break;
+			case "June":
+				var monthA = "6";
+				break;
+			case "July":
+				var monthA = "7";
+				break;
+			case "August":
+				var monthA = "8";
+				break;
+			case "September":
+				var monthA = "9";
+				break;
+			case "October":
+				var monthA = "10";
+				break;
+			case "November":
+				var monthA = "11";
+				break;
+			case "December":
+				var monthA = "12";
+				break;	
+		}
+
+		
+		while(checkMonth == -1) {
+			window.alert ("Not a valid month");
+			month = window.prompt("What MONTH is your birthday in?");
+			checkMonth = birthMonth.indexOf(month);
+		} 
+		
+		var day=window.prompt("What DAY is your birthday?");
+		var birthDay=["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
+		var checkDay = birthDay.indexOf(day);
+		
+		while(checkDay == -1) {
+			window.alert ("Not a valid day");
+			day = window.prompt("What DAY is your birthday?");
+			checkDay= birthDay.indexOf(day);
+		} 
+		var year=window.prompt("What YEAR were you born?")
+	
+	
+		var myBirthday = document.getElementsByTagName("h1")[0];
+		var birthDate =  month +" "+day+", "+year ;
+		myBirthday.innerHTML="Your Birthday is " + birthDate;
+		
+		
+		var cur = new Date();
+		var monStr= cur.getMonth();
+		var dayStr = cur.getDate();
+		var yearStr = cur.getFullYear();
+		var oneYr = 31536000000; //amount of milliseconds in 1 year
+		var monthYr = 12; //months in yr
+		var yAge = (new Date(yearStr, monStr, dayStr)) - (new Date(year, (monthA-1), day));
+		
+		if((parseInt(yAge / oneYr)) < 1){
+			document.getElementsByTagName("h2")[0].innerHTML= "You are " + Math.floor((yAge / oneYr) * monthYr) + " months old";
+		}
+		else{
+			document.getElementsByTagName("h2")[0].innerHTML= "You are "+ Math.floor(yAge / oneYr)+" years old";
+		}
+		
+		//add a birthday countdown
+		countdown(); 
+		setInterval("countdown()", 1000);
+		function countdown(){
+		
+			var bDay= new Date();
+			var curDate= bDay.toLocaleDateString();
+			var curTime= bDay.toLocaleTimeString();
+			document.getElementById("currentDate").innerHTML="Today's Date and Time: </br>"+curDate +"</br>"+ curTime;
+		}
+
+		
+		var mAge = monStr - (monthA -1);
+		var dAge= dayStr- day;
+		document.getElementById("countdowner").innerHTML=Math.abs(mAge)+" Months " + Math.abs(dAge)+" Days Until Your Next Birthday";
+		
+		
+
+		 
+	</script>
+</body>
+</html>
